@@ -1,0 +1,8 @@
+---
+- name: "Step 1 - Validate cloudformation templates using aws command"
+  command: aws cloudformation validate-template --template-url https://s3.amazonaws.com/{{ bucketname }}/{{ subdirectory }}/{{ env }}/{{ item | basename }}
+  register: validate_results
+  with_fileglob: 
+   - cf_templates/*
+
+

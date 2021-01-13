@@ -1,0 +1,6 @@
+---
+- name: Deleting cloudfomration template
+  cloudformation:
+    stack_name: "{{ stack_prefix }}-{{ env }}"
+    state: absent
+    region: us-east-1

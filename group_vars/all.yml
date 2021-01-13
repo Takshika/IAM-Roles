@@ -1,0 +1,5 @@
+---
+stack_prefix: "{{ lookup('env', 'STACK_PREFIX') }}"
+master_template: IAM_ROLES.json
+bucketname: <bucket_name>
+subdirectory: CICD

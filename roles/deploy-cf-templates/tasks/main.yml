@@ -1,0 +1,10 @@
+---
+- name: Deploying cloud formation template via ansbile stack
+  cloudformation:
+    stack_name: "{{ stack_prefix }}-{{ env }}"
+    state: present
+    region: us-east-1
+    disable_rollback: false
+    template_url: https://s3.amazonaws.com/{{ bucketname }}/{{ subdirectory }}/{{ env }}/{{ master_template }}
+    tags:
+      Name: "{{ stack_prefix }}-{{ env }}"

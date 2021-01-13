@@ -1,0 +1,32 @@
+# Prepare CloudFormation Templates
+- name: Preparing CloudFormation Templates
+  hosts: "{{ env }}"  
+  roles:
+    - prepare-cf-templates
+  gather_facts: false
+  tags: prepare
+
+# Validate CloudFormation Templates
+- name: Validating CloudFormation Templates
+  hosts: "{{ env }}"  
+  roles:
+    - validate-cf-templates
+  gather_facts: false
+  tags: validate
+
+# Deploy CloudFormation Templates
+- name: Deploying CloudFormation Templates
+  hosts: "{{ env }}"  
+  roles:
+    - deploy-cf-templates
+  gather_facts: false
+  tags: deploy
+
+# Delete CloudFormation Templates
+- name: Deleting CloudFormation Templates
+  hosts: "{{ env }}"  
+  roles:
+    - delete-cf-templates
+  gather_facts: false
+  tags: delete
+

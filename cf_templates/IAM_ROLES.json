@@ -1,0 +1,56 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "NON PROD IAM ROLE",
+    "Mappings" : {
+        "GENTAGS" : {
+          "TAG" : { "TAGKEY" : "Stage", "TAGVALUE" : "NONPROD" }
+        }
+    },
+    "Resources": {
+        "INSTANCEIAMROLE": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": "INSTANCE-IAM-ROLE-CICD-{{ env }}",
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/CloudWatchFullAccess"
+
+                ]
+            }
+        },
+        "INSTANCEPROFILE": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "InstanceProfileName": "INSTANCE-IAM-ROLE-CICD-{{ env }}",
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "INSTANCEIAMROLE"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs" : {
+        "INSTANCEIAMROLEOUTPUTCICD{{ env }}" : {
+          "Description" : "INSTANCE-IAM-ROLE-CICD-{{ env }} role definition",
+          "Value" : { "Ref" : "INSTANCEIAMROLE" },
+          "Export" : { "Name" : "INSTANCE-IAM-ROLE-CICD-{{ env }}" }
+        }
+    }
+}
