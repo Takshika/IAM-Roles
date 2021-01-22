@@ -19,7 +19,7 @@
 
 - name: "Upload Cloudformation templates to s3"
   aws_s3:
-    bucket: takshika-cftemplate
+    bucket: s3://takshika-cftemplate/
     object: "{{ subdirectory }}/{{ env }}/{{ item | basename }}"
     src: ./tmp/{{ item | basename }}
     encrypt: yes
