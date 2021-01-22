@@ -1,6 +1,9 @@
 node {
 
-    checkout scm
+    // checkout(scm)
+    scmVars = checkout(scm)
+    echo "scmVars.BRANCH_NAME: ${scmVars.GIT_BRANCH.substring(7)}"
+    BRANCH_NAME = "${scmVars.GIT_BRANCH.substring(7)}"
     loadEnvironmentVariables("parameters/${BRANCH_NAME}.properties")
     withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASSWORD', usernameVariable: 'VAULT_USER')]) {
 
