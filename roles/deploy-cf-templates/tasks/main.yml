@@ -5,6 +5,6 @@
     state: present
     region: us-east-1
     disable_rollback: false
-    template_url: https://s3.amazonaws.com/{{ bucketname }}/{{ subdirectory }}/{{ env }}/{{ master_template }}
+    template_url: https://s3.amazonaws.com/{{ bucket_name }}/{{ subdirectory }}/{{ env }}/{{ master_template }}
     tags:
       Name: "{{ stack_prefix }}-{{ env }}"
