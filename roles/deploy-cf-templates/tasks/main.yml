@@ -1,7 +1,7 @@
 ---
 - name: Deploying cloud formation template via ansbile stack
   cloudformation:
-    stack_name: "{{ stack_prefix }}-{{ env }}"
+    stack_name: "test-{{ env }}"
     state: "present"
     region: "us-east-1"
     disable_rollback: false
