@@ -1,4 +1,10 @@
 ---
+- name: "Delete temporary files - pre"
+  file:
+    path: ./tmp/{{ item | basename }}
+    state: absent
+  with_fileglob: 
+   - cf_templates/*
 
 - name: "Prepare Cloudformation templates"
   template:
@@ -7,7 +13,6 @@
     mode: 0644
   with_fileglob: 
    - cf_templates/*
-
 
 - name: "upload Cloudformation templates to s3"
   aws_s3:
