@@ -1,5 +1,6 @@
 ---
 - include_vars: ../../../group_vars/all.yml
+  vars: 
 
 - name: "Delete temporary files - pre"
   file:
@@ -14,9 +15,9 @@
     dest: ./tmp/{{ item | basename }}
     mode: 0644
   with_fileglob: 
-   - cf_templates/*
+   - cf_templates/*   
 
-- name: "upload Cloudformation templates to s3"
+- name: "Upload Cloudformation templates to s3"
   aws_s3:
     bucket: "{{ bucketname }}"
     object: "{{ subdirectory }}/{{ env }}/{{ item | basename }}"

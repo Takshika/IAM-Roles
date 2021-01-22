@@ -6,20 +6,20 @@ node {
     withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASSWORD', usernameVariable: 'VAULT_USER')]) {
 
     stage ('Build environment'){
-    sh 'ansible-playbook site.yml -e env=$environment  --tags "prepare"'
+    sh 'ansible-playbook site.yml -e env=$BRANCH_NAME  --tags "prepare"'
     }
 
     stage ('Validate CF Templates'){
-    sh 'ansible-playbook site.yml -e env=$environment  --tags "validate"'
+    sh 'ansible-playbook site.yml -e env=$BRANCH_NAME  --tags "validate"'
     }
 
     stage ('Deploy CF Templates'){
-    sh 'ansible-playbook site.yml -e env=$environment  --tags "deploy"'  
+    sh 'ansible-playbook site.yml -e env=$BRANCH_NAME  --tags "deploy"'  
     }
 
     stage ('Delete CF Templates'){
     if (env.DELETE_STACK == 'YES'){
-    sh 'ansible-playbook site.yml -e env=$environment  --tags "delete"'
+    sh 'ansible-playbook site.yml -e env=$BRANCH_NAME  --tags "delete"'
     }  
     }
 }
