@@ -1,4 +1,6 @@
 ---
+- include_vars: ../../../group_vars/all.yml
+
 - name: "Delete temporary files - pre"
   file:
     path: ./tmp/{{ item | basename }}
