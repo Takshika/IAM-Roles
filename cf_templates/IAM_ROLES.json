@@ -32,7 +32,7 @@
 
                 ]
             }
-        },
+        }, 
         "INSTANCEPROFILE": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
