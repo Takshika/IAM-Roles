@@ -1,7 +1,6 @@
 node {
 
     checkout(scm)
-    print env
     loadEnvironmentVariables("parameters/${BRANCH_NAME}.properties")
     withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASSWORD', usernameVariable: 'VAULT_USER')]) {
 

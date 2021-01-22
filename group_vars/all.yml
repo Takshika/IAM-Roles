@@ -1,5 +1,5 @@
 ---
 stack_prefix: "{{ lookup('env', 'STACK_PREFIX') }}"
 master_template: cf_Templates.json
-bucketname: takshika-cftemplate
+bucketname: s3://takshika-cftemplate/
 subdirectory: CICD
