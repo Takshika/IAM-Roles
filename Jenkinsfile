@@ -25,7 +25,7 @@ node {
     }  
     }
 }
-}
+}  
 
 def loadEnvironmentVariables(path){
     def props = readProperties  file: path
