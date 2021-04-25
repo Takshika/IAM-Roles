@@ -1,17 +1,6 @@
 ## General Info
 This pipeline is used to deploy IAM roles via a CICD pipeline.  
 
-## USed Skills
-* Ansible
-* CICD 
-* CF Templates
-* GitHub
-* Jenkins
-
-## Environments
-* STAGING
-* NONPROD
-
 ## Setup
 Jenkinsfile is called in jenkins console which holds the references to all the underlying code files.
 On Jenkins server make sure ansible, boto3, awscli, botocore is prsent. Also make sure the SG on the Jenkins server has all the necessary ports enable like  port 22,443,80. Make sure the IAM roles has sufficient permission to deploy the cloudformation template and S3. 
