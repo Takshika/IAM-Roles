@@ -1,22 +1,23 @@
 ---
-
+# Prepare CloudFormation templates by copying them to a temporary folder
 - name: "Prepare Cloudformation templates"
   template:
-    src: "{{ item }}"
-    dest: ./tmp/{{ item | basename }}
-    mode: 0644
+    src: "{{ item }}"                    # Source template file path (iterated)
+    dest: ./tmp/{{ item | basename }}   # Destination path in local tmp folder
+    mode: 0644                         # File permission mode (read/write for owner, read for others)
   with_fileglob: 
-   - cf_templates/*
+    - cf_templates/*                   # Iterate over all files in cf_templates directory
 
 
+# Upload CloudFormation templates to S3 bucket with encryption
 - name: "upload Cloudformation templates to s3"
   aws_s3:
-    bucket: "{{ bucketname }}"
-    object: "{{ subdirectory }}/{{ env }}/{{ item | basename }}"
-    src: ./tmp/{{ item | basename }}
-    encrypt: yes
-    encryption_mode: AES256
-    overwrite: always
-    mode: put
+    bucket: "{{ bucketname }}"                                  # Target S3 bucket name
+    object: "{{ subdirectory }}/{{ env }}/{{ item | basename }}" # S3 object path including env and filename
+    src: ./tmp/{{ item | basename }}                            # Local source file path to upload
+    encrypt: yes                                                # Enable encryption on upload
+    encryption_mode: AES256                                     # Use AES256 encryption for S3 object
+    overwrite: always                                           # Overwrite existing files with same name
+    mode: put                                                  # Upload mode (put = upload/overwrite)
   with_fileglob: 
-   - cf_templates/*
+    - cf_templates/*                                           # Iterate over all files in cf_templates directory

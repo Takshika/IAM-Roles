@@ -1,5 +1,11 @@
----
+# Prefix used for naming the CloudFormation stack
 stack_prefix: "{{ lookup('env', 'STACK_PREFIX') }}"
+
+# Master CloudFormation template file
 master_template: IAM_ROLES.json
+
+# S3 bucket where templates are stored (replace with your actual bucket name)
 bucketname: <bucket_name>
+
+# Folder inside the bucket where templates are located
 subdirectory: CICD

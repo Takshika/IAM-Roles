@@ -43,3 +43,15 @@ If we wish to delete the template later, then the DeleteStack can be set "Yes" i
 
 ## Usage
 To deploy IAM roles with CICD pipeline, thereby reducing the manual efforts and  have a better tracking.
+
+flowchart TD
+    A[Start Build on Jenkins] --> B[Checkout latest code from GitHub]
+    B --> C[Load environment variables from properties file]
+    C --> D[Inject Vault credentials securely]
+    D --> E[Stage 1: Build Environment - Run Ansible playbook with tag 'prepare']
+    E --> F[Stage 2: Validate CF Templates - Run playbook with tag 'validate']
+    F --> G[Stage 3: Deploy CF Templates - Run playbook with tag 'deploy']
+    G --> H{Is DELETE_STACK = YES?}
+    H -- Yes --> I[Stage 4: Delete CF Templates - Run playbook with tag 'delete']
+    H -- No --> J[Pipeline Complete]
+    I --> J

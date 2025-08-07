@@ -1,8 +1,7 @@
 ---
+# Step 1 - Validate CloudFormation templates using AWS CLI
 - name: "Step 1 - Validate cloudformation templates using aws command"
   command: aws cloudformation validate-template --template-url https://s3.amazonaws.com/{{ bucketname }}/{{ subdirectory }}/{{ env }}/{{ item | basename }}
-  register: validate_results
+  register: validate_results               # Save the command output/results for later use
   with_fileglob: 
-   - cf_templates/*
-
-
+    - cf_templates/*                       # Loop over all template files in the cf_templates directory

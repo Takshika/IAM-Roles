@@ -1,6 +1,7 @@
 ---
-- name: Deleting cloudfomration template
+# Delete CloudFormation stack using Ansible cloudformation module
+- name: Deleting cloudformation template
   cloudformation:
-    stack_name: "{{ stack_prefix }}-{{ env }}"
-    state: absent
-    region: us-east-1
+    stack_name: "{{ stack_prefix }}-{{ env }}"   # Name of the CloudFormation stack to delete
+    state: absent                                # Ensure the stack is deleted (absent means delete)
+    region: us-east-1                            # AWS region where the stack exists

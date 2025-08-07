@@ -1,10 +1,12 @@
 ---
-- name: Deploying cloud formation template via ansbile stack
+# Deploy CloudFormation stack using Ansible cloudformation module
+- name: Deploying cloud formation template via ansible stack
   cloudformation:
-    stack_name: "{{ stack_prefix }}-{{ env }}"
-    state: present
-    region: us-east-1
-    disable_rollback: false
-    template_url: https://s3.amazonaws.com/{{ bucketname }}/{{ subdirectory }}/{{ env }}/{{ master_template }}
-    tags:
+    stack_name: "{{ stack_prefix }}-{{ env }}"           # Name of the CloudFormation stack, includes environment suffix
+    state: present                                        # Ensures the stack is created or updated
+    region: us-east-1                                     # AWS region to deploy the stack in
+    disable_rollback: false                               # Allow rollback on failure (false means rollback enabled)
+    template_url: >                                       # URL of the CloudFormation template in S3
+      https://s3.amazonaws.com/{{ bucketname }}/{{ subdirectory }}/{{ env }}/{{ master_template }}
+    tags:                                                 # Tags to apply to the CloudFormation stack resources
       Name: "{{ stack_prefix }}-{{ env }}"
